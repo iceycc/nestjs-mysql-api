@@ -153,10 +153,10 @@ export class AccountService {
           const { roles, ...oths } = data;
           await entityManager.update(AccountEntity, id, oths);
           // 如果角色有就添加角色
+          const rolesList = roles.split(',');
+          // 删除之前的
+          await entityManager.delete(AccountRoleEntity, { accountId: id });
           if (roles) {
-            const rolesList = roles.split(',');
-            // 删除之前的
-            await entityManager.delete(AccountRoleEntity, { accountId: id });
             // 新增现在的
             for (const item of rolesList) {
               await entityManager.save(AccountRoleEntity, { accountId: id, roleId: Number(item) });
@@ -237,7 +237,7 @@ export class AccountService {
     return {
       data: data.map((item: ObjectType) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { password, mobile, email, username, nodeAuth, ...others } = item;
+        const { password, mobile, email, username, simpNodeAuth, ...others } = item;
         return Object.assign(others, {
           mobile: this.toolsService.isUUID(mobile) ? '' : mobile,
           email: this.toolsService.isUUID(email) ? '' : email,

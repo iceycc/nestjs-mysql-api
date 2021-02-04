@@ -9,20 +9,14 @@
 * 1、本项目仅仅是实现了`rbac`的权限系统,对于其他的功能需要自己基于这个基础上去扩展
 * 2、先在本地创建数据库
 * 3、在项目的根目录的`.env`文件修改为你自己的数据库基本配置(地址、用户名、密码、数据库)
-* 4、运行命令,将实体类映射到数据库中,生成数据表
-
-  ```shell
-  npm run generate
-  npm run db
-  ```
-* 5、启动项目
+* 4、启动项目
 
   ```shell
   npm run start:dev
   ```
 
-* 6、运行第五步的时候会默认初始化菜单数据和用户数据(账号:`admin`,密码:123456)
-* 7、如果你想初始化别的数据,可以在`src/services/init-db`中写上你要初始化的数据
+* 5、运行第五步的时候会默认初始化菜单数据和用户数据(账号:`admin`,密码:123456)
+* 6、如果你想初始化别的数据,可以在`src/services/init-db`中写上你要初始化的数据
 
 ## 二、主要实现功能
 
@@ -32,13 +26,6 @@
   ```shell
   # 会将数据库文件映射生成typeORM的实体类
   npm run db1
-  ```
-
-- [x] 如果你是新项目可以使用数据迁移的方式,将你写的实体类,在需要的时候手动映射到数据库
-
-  ```shell
-  npm run generate
-  npm run db
   ```
 
 - [x] 基于`RBAC`实现权限控制
@@ -57,6 +44,13 @@
 
 - [x] 字典管理主要是用于项目中配置下拉框使用的
 
+- [x] 集成`swagger`文档
+
+  ```shell
+  localhost:7000/api/v1/docs
+  # 端口号根据.env文件的PORT=7000	来写
+  ```
+
 - [x] 在`module`中统一封装了几个模块
   * `code`是验证码模块
   * `file`是文件模块
@@ -69,6 +63,9 @@
 
   ```shell
   npm run build
+  # 开发环境
+  npm run pm2:dev
+  # 生产环境
   npm run pm2:prod
   ```
 
@@ -78,11 +75,13 @@
   pm2 log
   ```
 
+- [x] 如果你的想做日志收集可以继承`Kafka`
+
 ## 三、技术解答
 
 > 本项目还在持续集成新功能进来,最后会加上前端做一个`cms`系统的`api`,后期会拉分支使用`graphql`提供`api`
 
-- 1、有关于`nestjs`的技术问题可以直接加我微信(微信号:332904234)<font color="#f00">备注:nest 开发</font>
+- 1、有关于`nestjs`的技术问题或索要关于`nestjs`的电子书可以直接加我微信(微信号:332904234)<font color="#f00">备注:nest 开发</font>
 
   <img src="https://shuiping.oss-cn-shenzhen.aliyuncs.com/nest-mysql-api/wx.jpg" width="200" height="220" style="margin-left:0" />
 
